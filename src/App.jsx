@@ -182,7 +182,7 @@ const App = () => {
       } else if (settingMode === 'simple') {
         bodyDescription = `Model stature: ${getHeightDesc(simpleHeight)}, approx ${simpleHeight}cm.`;
       } else {
-        bodyDescription = `Target measurements: ${detailHeight}cm height ${getHeightDesc(simpleHeight)}. bust size of ${bustSize} cup ${getBustDesc(bustSize)}. ${getLevelDesc(waistLevel, 'waist')}, ${getLevelDesc(hipLevel, 'hips')}, ${getLevelDesc(limbLevel, 'limbs')}.`;
+        bodyDescription = `Target measurements: ${detailHeight}cm height ${getHeightDesc(simpleHeight)}. bust size of ${bustSize} cup ${getBustDesc(bustSize)}. ${getLevelDesc(waistLevel, 'waist')}, ${getLevelDesc(hipLevel, 'hips')}, ${getLevelDesc(limbLevel, 'limbs')}. **OVERRIDE**: You MUST IGNORE the original model's body measurements if they conflict with these specs. Reshape the body mesh and completely to match these settings and it the garment to this propotion.`;
       }
 
       // 場景與風格
