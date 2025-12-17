@@ -232,7 +232,7 @@ const App = () => {
         generationConfig: {
           responseModalities: ["IMAGE"],
           temperature: 0.4,
-          preserveIdentity: True,
+          preserveIdentity: true,
           ...(isDeployed && resolution !== '1k' ? {} : {})
           
         }
