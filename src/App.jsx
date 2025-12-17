@@ -232,9 +232,10 @@ const App = () => {
         generationConfig: {
           responseModalities: ["IMAGE"],
           temperature: 0.4,
-          aspectRatio: aspectRatio,
+          imageConfig: {
+            aspectRatio: aspectRatio,
           ...(isDeployed ? {imageSize: resolution} : {})
-          ,
+          }
         }
       };
 
