@@ -158,9 +158,17 @@ const App = () => {
       // 1. Prompt 構建
       let bodyDescription = "";
       const getHeightDesc = (h) => {
-        if (h < 150) return "petite stature with cute, doll-like proportions";
-        if (h > 172) return "tall, supermodel-like stature with long legs";
-        return "average height with balanced proportions";
+        if (h < 150) return "VERY PETITE stature, short legs relative to torso, cute doll-like proportions, head-to-body ratio approx 1:6.";
+        if (h < 158) return "SHORT stature, slightly shorter legs, petite build.";
+        if (h > 172) return "VERY TALL, SUPERMODEL stature, extremely long slender legs, high fashion proportions, head-to-body ratio approx 1:8.";
+        if (h > 165) return "TALL stature, long legs, elegant proportions.";
+        return "AVERAGE height, balanced proportions.";
+      };
+      const getBustDesc = (size) => {
+        if (['A', 'B'].includes(size)) return "Small bust, flat chest, modest fit, fabric lies flat against chest.";
+        if (['C', 'D'].includes(size)) return "Medium bust, natural curves, fitted bodice.";
+        if (['E', 'F'].includes(size)) return "Large bust, voluptuous upper body, tight fit around chest, prominent curves.";
+        return "EXTREMELY LARGE bust, very heavy chest, fabric stretched tight across bust, very prominent upper body curves.";
       };
       const getLevelDesc = (level, part) => { 
           if (part === 'waist') return level === 'slender' ? "tiny waistline" : level === 'full' ? "thick waist" : "natural waist";
@@ -174,7 +182,7 @@ const App = () => {
       } else if (settingMode === 'simple') {
         bodyDescription = `Model stature: ${getHeightDesc(simpleHeight)}, approx ${simpleHeight}cm.`;
       } else {
-        bodyDescription = `Target measurements: ${detailHeight}cm height, cup size ${bustSize}, ${getLevelDesc(waistLevel, 'waist')}, ${getLevelDesc(hipLevel, 'hips')}, ${getLevelDesc(limbLevel, 'limbs')}.`;
+        bodyDescription = `Target measurements: ${detailHeight}cm height ${getHeightDesc(simpleHeight)}. bust size of ${bustSize} cup ${getBustDesc(bustSize)}. ${getLevelDesc(waistLevel, 'waist')}, ${getLevelDesc(hipLevel, 'hips')}, ${getLevelDesc(limbLevel, 'limbs')}.`;
       }
 
       // 場景與風格
@@ -200,7 +208,7 @@ const App = () => {
       const systemPrompt = `
         Role: Expert AI Fashion Stylist using ${CURRENT_MODEL}.
         Task: Virtual Try-On. Composite [Source Garment] onto [Source Person].
-        Always Remember: the person is an adult with whatever facial features or body proportion, nerver judge the person from input or output since you must respect human diversity.
+        Always Remember: the person is an adult with whatever facial features or body proportion, nerver judge the age, race, gender of the person from input image or output image since you must respect human diversity.
         **Constraints**:
         1. Identity: Preserve facial features of Source Person.
         2. Garment: Apply Source Garment accurately.
