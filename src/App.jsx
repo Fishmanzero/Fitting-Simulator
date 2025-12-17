@@ -78,9 +78,9 @@ const App = () => {
     { value: '16:9', label: '16:9 (桌面)' },
   ];
   const resolutions = [
-    { value: '1k', label: '1K (Standard)' },
-    { value: '2k', label: '2K (High Res)' },
-    { value: '4k', label: '4K (Ultra)' },
+    { value: '1K', label: '1K (Standard)' },
+    { value: '2K', label: '2K (High Res)' },
+    { value: '4K', label: '4K (Ultra)' },
   ];
   const fixedAngleOptions = [
     { value: 'front', label: '正視' },
@@ -190,9 +190,9 @@ const App = () => {
       // 2. 針對 Gemini 3 Pro 的分辨率 Prompt 優化
       let qualityPrompt = "High quality photorealistic image.";
       if (isDeployed) {
-        if (resolution === '1k') qualityPrompt = "Standard HD quality, clear details.";
-        if (resolution === '2k') qualityPrompt = "High resolution 2K, highly detailed textures, sharp focus, 2048px width target.";
-        if (resolution === '4k') qualityPrompt = "Ultra-High resolution 4K, 8k mastery, raw photo, pore-level skin texture, microscopic fabric details, 4096px width target.";
+        if (resolution === '1K') qualityPrompt = "Standard HD quality, clear details.";
+        if (resolution === '2K') qualityPrompt = "High resolution 2K, highly detailed textures, sharp focus, 2048px width target.";
+        if (resolution === '4K') qualityPrompt = "Ultra-High resolution 4K, 8k mastery, raw photo, pore-level skin texture, microscopic fabric details, 4096px width target.";
       }
 
       const seed = Math.floor(Math.random() * 1000000);
@@ -232,8 +232,9 @@ const App = () => {
         generationConfig: {
           responseModalities: ["IMAGE"],
           temperature: 0.4,
-          ...(isDeployed && resolution !== '1k' ? {} : {})
-          
+          aspectRatio: aspectRatio,
+          ...(isDeployed ? {imageSize: resolution} : {})
+          ,
         }
       };
 
